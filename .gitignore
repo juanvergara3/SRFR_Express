@@ -127,4 +127,4 @@ dist
 .pnp.*
 
 #bun
-.lockb
+*.lockb
