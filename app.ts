@@ -7,7 +7,10 @@ import CreateHttpError from "http-errors";
 import { initPoolAsync } from "./src/services/db.service";
 
 //routes
-import { indexRouter } from "./src/routes/index.route";
+import { facturaRouter } from "./src/routes/factura.route";
+import { clienteRouter } from "./src/routes/cliente.route";
+import { responsableRouter } from "./src/routes/responsable.route";
+import { ubicacionRouter } from "./src/routes/ubicacion.route";
 
 //app and port
 const app: Express = express();
@@ -31,7 +34,10 @@ app.use(express.json());
 app.use(express.urlencoded( {extended:true} ));
 
 //router setup
-app.use('/', indexRouter);
+app.use('/facturas', facturaRouter);
+app.use('/clientes', clienteRouter);
+app.use('/responsables', responsableRouter);
+app.use('/ubicaciones', ubicacionRouter);
 
 //404 catcher
 app.use(function(req, res, next) {
@@ -81,3 +87,4 @@ function onError(error:any) {
         throw error;
     }
   }
+  

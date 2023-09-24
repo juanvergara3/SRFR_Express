@@ -1,5 +1,5 @@
 import { dbConfig } from '../configs/db.config';
-import { connect, ConnectionPool, Request } from 'mssql';
+import { ConnectionPool, Request, Int } from 'mssql';
 
 const globalPool = new ConnectionPool(dbConfig);
 
@@ -30,32 +30,19 @@ async function runQueryAsync(query:string) {
   return result;
 }
 
-// async function runQueryAsync(query:string) {
-//   try {
-//     return globalPool.request().query(query, (err, recordset) => {
-//       return recordset;
-//     });
+async function executeProcedureAsync(procedureName:string, params?:{name:string, value:any}[]) {
 
-//     // globalPool.query(query, (err, recordset) => {
-//     //   return recordset;
-//     // });
+  const request = new Request(globalPool);
 
-//   } catch (error:any) {
-//     console.log(error.message);
-//   }
-// }
+  if (params) {
 
-
-// function(req, res) {
-//   req.app.locals.db.query('SELECT TOP 10 * FROM table_name', function(err, recordset) {
-//     if (err) {
-//       console.error(err)
-//       res.status(500).send('SERVER ERROR')
-//       return
-//     }
-//     res.status(200).json({ message: 'success' })
-//   })
-// }
+    params.forEach((field) => {
+      request.input(field.name, Int, field.value);
+    })
+  } 
+    
+  return await request.execute(procedureName);
+}
 
 async function initPoolAsync() {
   return await globalPool.connect();
@@ -65,4 +52,4 @@ async function closePoolAsync() {
   globalPool.close();
 }
 
-export { globalPool, initPoolAsync, runQueryAsync, closePoolAsync };
+export { globalPool, initPoolAsync, closePoolAsync, runQueryAsync, executeProcedureAsync };

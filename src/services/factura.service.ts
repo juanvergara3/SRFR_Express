@@ -2,7 +2,7 @@ import { executeProcedureAsync } from "./db.service";
 import { getOffset } from "../utils/helper.util";
 import { generalConfig } from "../configs/general.config";
 
-async function getEstados(page = 1) {
+async function getFacturas(page = 1) {
 
   const listPerPage = generalConfig.listPerPageFacturas;
   const offset = getOffset(page, listPerPage);
@@ -13,15 +13,4 @@ async function getEstados(page = 1) {
   ]);
 }
 
-
-   
-
-//   const data = emptyOrRows(rows);
-//   const meta = {page};
-
-//   return {
-//     data,
-//     meta
-//   }
-
-export { getEstados };
+export { getFacturas };

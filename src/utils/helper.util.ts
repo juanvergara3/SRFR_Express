@@ -1,12 +1,5 @@
-function getOffset(currentPage: number = 1, listPerPage: number) {
+function getOffset(currentPage: number = 1, listPerPage: number): number {
     return (currentPage - 1) * listPerPage; // antes estaba como [listPerPage], pero genera un error de tipo.
 }
-  
-function emptyOrRows(rows: any) {
-  if (!rows) {
-    return [];
-  }
-  return rows;
-}
 
-export { getOffset, emptyOrRows };
+export { getOffset };
