@@ -1,4 +1,4 @@
-import { getFacturas } from "../services/factura.service";
+import { getFacturas, newFactura } from "../services/factura.service";
 import { Request, Response, NextFunction } from "express";
 
 async function getFacturasController(req:Request, res:Response, next:NextFunction) { //make this async somehow
@@ -11,6 +11,21 @@ async function getFacturasController(req:Request, res:Response, next:NextFunctio
         console.error(`Error executing query`);
         next(err);
     }
-  };
+};
 
-export { getFacturasController };
+async function newFacturaController(req:Request, res:Response, next:NextFunction) { //make this async somehow
+    try {
+
+        let numero= req.body.numero_factura;
+        let fecha = req.body.fecha_generacion;
+        
+        let result = await newFactura(numero, fecha);
+
+        res.json("Factura creada con éxito.");
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+};
+
+export { getFacturasController, newFacturaController };

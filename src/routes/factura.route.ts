@@ -1,8 +1,9 @@
 import express, { Router } from "express";
-import { getFacturasController } from "../controllers/factura.controller";
+import { getFacturasController, newFacturaController } from "../controllers/factura.controller";
 
 let facturaRouter: Router =  express.Router();
 
 facturaRouter.get('/', getFacturasController);
+facturaRouter.post('/', newFacturaController);
 
 export { facturaRouter };

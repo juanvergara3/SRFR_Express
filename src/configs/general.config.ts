@@ -1,5 +1,5 @@
 const generalConfig = {
-    listPerPageFacturas: 10
+    listPerPageFacturas: 110
 };
    
 export { generalConfig };
