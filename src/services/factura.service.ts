@@ -13,9 +13,21 @@ async function getFacturas(page = 1) {
   ]);
 }
 
-async function newFactura(numero: number, fecha: string) {
+async function newFactura(numeroFactura: number, fechaGeneracion: string) {
 
-  return await runQueryAsync(`insert into dbo.facturas (numero_factura, fecha_generacion) values (${numero}, '${fecha}');`);
+  return await runQueryAsync(
+    `insert into dbo.facturas (numero_factura, fecha_generacion) values (${numeroFactura}, '${fechaGeneracion}');`
+  );
 }
 
-export { getFacturas, newFactura };
+async function editFactura(idFactura: number, numeroFactura?: number, fechaGeneracion?: string){
+
+  return await runQueryAsync(
+    `UPDATE facturas SET 
+    numero_factura = COALESCE(${numeroFactura ? numeroFactura : null}, numero_factura), 
+    fecha_generacion =  COALESCE(${fechaGeneracion ? `'${fechaGeneracion}'` : null}, fecha_generacion) 
+    WHERE id_factura = ${idFactura};`
+    );
+}
+
+export { getFacturas, newFactura, editFactura };

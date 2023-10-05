@@ -1,4 +1,4 @@
-import { getFacturas, newFactura } from "../services/factura.service";
+import { getFacturas, newFactura, editFactura } from "../services/factura.service";
 import { Request, Response, NextFunction } from "express";
 
 async function getFacturasController(req:Request, res:Response, next:NextFunction) { //make this async somehow
@@ -16,10 +16,10 @@ async function getFacturasController(req:Request, res:Response, next:NextFunctio
 async function newFacturaController(req:Request, res:Response, next:NextFunction) { //make this async somehow
     try {
 
-        let numero= req.body.numero_factura;
-        let fecha = req.body.fecha_generacion;
+        let numeroFactura = req.body.numero_factura;
+        let fechaGeneracion = req.body.fecha_generacion;
         
-        let result = await newFactura(numero, fecha);
+        let result = await newFactura(numeroFactura, fechaGeneracion);
 
         res.json("Factura creada con éxito.");
     } catch (err) {
@@ -28,4 +28,20 @@ async function newFacturaController(req:Request, res:Response, next:NextFunction
     }
 };
 
-export { getFacturasController, newFacturaController };
+async function editFacturaController(req:Request, res:Response, next:NextFunction) { //make this async somehow
+    try {
+
+        let idFactura = req.body.id_factura
+        let numeroFactura = req.body.numero_factura;
+        let fechaGeneracion = req.body.fecha_generacion;
+        
+        let result = await editFactura(idFactura, numeroFactura, fechaGeneracion);
+
+        res.json("Factura editada con éxito.");
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+};
+
+export { getFacturasController, newFacturaController, editFacturaController };
