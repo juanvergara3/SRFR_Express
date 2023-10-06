@@ -2,6 +2,7 @@
 import express, { Express, Request, Response, NextFunction } from "express";
 import helmet from "helmet";
 import CreateHttpError from "http-errors";
+import cors from "cors";
 
 //db
 import { initPoolAsync } from "./src/services/db.service";
@@ -23,12 +24,13 @@ app.locals.db = initPoolAsync();
 app.set('port', port);
 
 app.use(helmet());
+app.use(cors());
 
-app.use(function(req, res, next) { //this needs to be updated (CORS on ExpressJS)
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) { //this needs to be updated (CORS on ExpressJS)
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 app.use(express.json());
 app.use(express.urlencoded( {extended:true} ));
