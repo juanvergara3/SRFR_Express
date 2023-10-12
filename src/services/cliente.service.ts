@@ -7,7 +7,7 @@ async function getClientes(page = 1) {
   const listPerPage = generalConfig.listPerPageFacturas;
   const offset = getOffset(page, listPerPage);
   
-  return await runQueryAsync(`select * from dbo.clientes`);
+  return await runQueryAsync(`select * from dbo.clientes;`);
 }
 
 export { getClientes };

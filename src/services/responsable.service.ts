@@ -7,7 +7,7 @@ async function getResponsables(page = 1) {
   const listPerPage = generalConfig.listPerPageFacturas;
   const offset = getOffset(page, listPerPage);
   
-  return await runQueryAsync(`select * from dbo.responsables`);
+  return await runQueryAsync(`select * from dbo.responsables;`);
 }
 
 export { getResponsables };

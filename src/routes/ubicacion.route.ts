@@ -1,7 +1,8 @@
 import express, { Router } from "express";
-import { getUbicacionesController } from "../controllers/ubicacion.controller";
+import { getUbicacionesController, getUbicacionesByClienteController } from "../controllers/ubicacion.controller";
 let ubicacionRouter: Router =  express.Router();
 
 ubicacionRouter.get('/', getUbicacionesController);
+ubicacionRouter.get('/p/', getUbicacionesByClienteController);
 
 export { ubicacionRouter };
