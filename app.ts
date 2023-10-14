@@ -12,6 +12,11 @@ import { facturaRouter } from "./src/routes/factura.route";
 import { clienteRouter } from "./src/routes/cliente.route";
 import { responsableRouter } from "./src/routes/responsable.route";
 import { ubicacionRouter } from "./src/routes/ubicacion.route";
+import { grupoRouter } from "./src/routes/grupo.route";
+import { activoRouter } from "./src/routes/activo.route";
+import { marcaRouter } from "./src/routes/marca.route";
+import { tipoRouter } from "./src/routes/tipo.route";
+import { estadoRouter } from "./src/routes/estado.route";
 
 //app and port
 const app: Express = express();
@@ -40,6 +45,11 @@ app.use('/facturas', facturaRouter);
 app.use('/clientes', clienteRouter);
 app.use('/responsables', responsableRouter);
 app.use('/ubicaciones', ubicacionRouter);
+app.use('/grupos', grupoRouter);
+app.use('/activos', activoRouter);
+app.use('/marcas', marcaRouter);
+app.use('/tipos', tipoRouter);
+app.use('/estados', estadoRouter);
 
 //404 catcher
 app.use(function(req, res, next) {
