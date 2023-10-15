@@ -17,6 +17,8 @@ import { activoRouter } from "./src/routes/activo.route";
 import { marcaRouter } from "./src/routes/marca.route";
 import { tipoRouter } from "./src/routes/tipo.route";
 import { estadoRouter } from "./src/routes/estado.route";
+import { proveedorRouter } from "./src/routes/proveedor.route";
+import { prestadorRouter } from "./src/routes/prestador.route";
 
 //app and port
 const app: Express = express();
@@ -50,6 +52,8 @@ app.use('/activos', activoRouter);
 app.use('/marcas', marcaRouter);
 app.use('/tipos', tipoRouter);
 app.use('/estados', estadoRouter);
+app.use('/proveedores', proveedorRouter);
+app.use('/prestadores', prestadorRouter);
 
 //404 catcher
 app.use(function(req, res, next) {
