@@ -31,7 +31,7 @@ async function newFacturaController(req:Request, res:Response, next:NextFunction
 async function editFacturaController(req:Request, res:Response, next:NextFunction) { //make this async somehow
     try {
 
-        let idFactura = req.body.id_factura
+        let idFactura = req.body.id_factura;
         let numeroFactura = req.body.numero_factura;
         let fechaGeneracion = req.body.fecha_generacion;
         
