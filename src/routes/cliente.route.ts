@@ -1,8 +1,9 @@
 import express, { Router } from "express";
-import { getClientesController } from "../controllers/cliente.controller";
+import { editClienteController, getClientesController } from "../controllers/cliente.controller";
 
 let clienteRouter: Router =  express.Router();
 
 clienteRouter.get('/', getClientesController);
+clienteRouter.patch('/', editClienteController);
 
 export { clienteRouter };

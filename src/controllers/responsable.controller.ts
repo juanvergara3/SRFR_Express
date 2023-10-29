@@ -24,7 +24,7 @@ async function editResponsableController(req:Request, res:Response, next:NextFun
         
         let result = await editResponsable(idResponsable, nombre, cedula, telefono, correo);
 
-        res.json("Factura editada con éxito.");
+        res.json("Responsable editado con éxito.");
     } catch (err) {
         console.error(`Error executing query`);
         next(err);
