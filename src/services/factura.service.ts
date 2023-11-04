@@ -13,6 +13,12 @@ async function getFacturas(page = 1) {
   ]);
 }
 
+async function getFacturaById(idFactura: number) {
+  return await runQueryAsync(
+    `select * from dbo.facturas where id_factura = ${idFactura};`
+  );
+}
+
 async function newFactura(numeroFactura: number, fechaGeneracion: string) {
 
   return await runQueryAsync(
@@ -20,7 +26,7 @@ async function newFactura(numeroFactura: number, fechaGeneracion: string) {
   );
 }
 
-async function editFactura(idFactura: number, numeroFactura?: number, fechaGeneracion?: string){
+async function editFactura(idFactura: number, numeroFactura?: number, fechaGeneracion?: string) {
 
   return await runQueryAsync(
     `UPDATE facturas SET 
@@ -30,4 +36,4 @@ async function editFactura(idFactura: number, numeroFactura?: number, fechaGener
     );
 }
 
-export { getFacturas, newFactura, editFactura };
+export { getFacturas, getFacturaById, newFactura, editFactura };

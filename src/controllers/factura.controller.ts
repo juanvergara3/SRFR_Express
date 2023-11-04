@@ -1,4 +1,4 @@
-import { getFacturas, newFactura, editFactura } from "../services/factura.service";
+import { getFacturas, getFacturaById, newFactura, editFactura } from "../services/factura.service";
 import { Request, Response, NextFunction } from "express";
 
 async function getFacturasController(req:Request, res:Response, next:NextFunction) { //make this async somehow
@@ -12,6 +12,19 @@ async function getFacturasController(req:Request, res:Response, next:NextFunctio
         next(err);
     }
 };
+
+async function getFacturaByIdController(req:Request, res:Response, next:NextFunction) {
+    try {
+        let idFactura =  req.query.id_factura;
+
+        let result = await getFacturaById(Number(idFactura));
+        
+        res.json(result.recordset[0]);
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}
 
 async function newFacturaController(req:Request, res:Response, next:NextFunction) { //make this async somehow
     try {
@@ -44,4 +57,4 @@ async function editFacturaController(req:Request, res:Response, next:NextFunctio
     }
 };
 
-export { getFacturasController, newFacturaController, editFacturaController };
+export { getFacturasController, getFacturaByIdController, newFacturaController, editFacturaController };

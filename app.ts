@@ -19,6 +19,7 @@ import { tipoRouter } from "./src/routes/tipo.route";
 import { estadoRouter } from "./src/routes/estado.route";
 import { proveedorRouter } from "./src/routes/proveedor.route";
 import { prestadorRouter } from "./src/routes/prestador.route";
+import { periodoRouter } from "./src/routes/periodo.route";
 
 //app and port
 const app: Express = express();
@@ -54,6 +55,7 @@ app.use('/tipos', tipoRouter);
 app.use('/estados', estadoRouter);
 app.use('/proveedores', proveedorRouter);
 app.use('/prestadores', prestadorRouter);
+app.use('/periodos', periodoRouter);
 
 //404 catcher
 app.use(function(req, res, next) {
