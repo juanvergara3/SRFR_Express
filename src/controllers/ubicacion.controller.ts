@@ -1,12 +1,25 @@
-import { getUbicaciones, getUbicacionesByCliente, editUbicacion } from "../services/ubicacion.service";
+import { getUbicaciones, getUbicacionById, getUbicacionesByCliente, editUbicacion } from "../services/ubicacion.service";
 import { Request, Response, NextFunction } from "express";
 
-async function getUbicacionesController(req:Request, res:Response, next:NextFunction) { //make this async somehow
+async function getUbicacionesController(req:Request, res:Response, next:NextFunction) {
     try {
         //let result = await getEstados(Number(req.query.page)); //this req.query.page needs to be studied
-        let result = await getUbicaciones(1);
+        let result = await getUbicaciones();
         
         res.json(result.recordset);
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}
+
+async function getUbicacionByIdController(req:Request, res:Response, next:NextFunction) {
+    try {
+        let idUbicacion = req.query.idUbicacion;
+
+        let result = await getUbicacionById(Number(idUbicacion));
+        
+        res.json(result.recordset[0]);
     } catch (err) {
         console.error(`Error executing query`);
         next(err);
@@ -43,7 +56,6 @@ async function editUbicacionController(req:Request, res:Response, next:NextFunct
         console.error(`Error executing query`);
         next(err);
     }
-};
+}
 
-
-export { getUbicacionesController, getUbicacionesByClienteController,editUbicacionController };
+export { getUbicacionesController, getUbicacionByIdController, getUbicacionesByClienteController,editUbicacionController };

@@ -1,13 +1,11 @@
 import { runQueryAsync, executeProcedureAsync } from "./db.service";
-import { getOffset } from "../utils/helper.util";
-import { generalConfig } from "../configs/general.config";
 
-async function getClientes(page = 1) {
-
-  const listPerPage = generalConfig.listPerPageFacturas;
-  const offset = getOffset(page, listPerPage);
-  
+async function getClientes() {
   return await runQueryAsync(`select * from dbo.clientes;`);
+}
+
+async function getClienteById(idCliente: number){
+  return await runQueryAsync(`select * from dbo.clientes where id_cliente = ${idCliente};`);
 }
 
 async function editCliente(idCliente: number, nit?: number, digitoVerificacion?: number, nombre?: string){
@@ -21,4 +19,4 @@ async function editCliente(idCliente: number, nit?: number, digitoVerificacion?:
     );
 }
 
-export { getClientes, editCliente };
+export { getClientes, getClienteById, editCliente };

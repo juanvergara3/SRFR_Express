@@ -4,6 +4,6 @@ import { getMarcasController, getMarcaByIdController } from "../controllers/marc
 let marcaRouter: Router =  express.Router();
 
 marcaRouter.get('/', getMarcasController);
-marcaRouter.get('/p/', getMarcaByIdController);
+marcaRouter.get('/id/p/', getMarcaByIdController);
 
 export { marcaRouter };

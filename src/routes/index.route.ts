@@ -1,5 +1,5 @@
 import express, { Router, Request, Response, NextFunction } from "express";
-import { getEstadosControllerFunction } from "../controllers/test.controller";
+//import { getEstadosControllerFunction } from "../controllers/test.controller";
 
 let indexRouter: Router =  express.Router();
 
@@ -23,6 +23,6 @@ let indexRouter: Router =  express.Router();
 //     });
 // });
 
-indexRouter.get('/', getEstadosControllerFunction);
+//indexRouter.get('/', getEstadosControllerFunction);
 
 export { indexRouter };

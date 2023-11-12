@@ -1,10 +1,11 @@
 import { runQueryAsync, executeProcedureAsync } from "./db.service";
-import { getOffset } from "../utils/helper.util";
-import { generalConfig } from "../configs/general.config";
 
-async function getResponsables(page = 1) {
-  
+async function getResponsables() {
   return await runQueryAsync(`select * from dbo.responsables;`);
+}
+
+async function getResponsableById(idResponsable: number){
+  return await runQueryAsync(`select * from dbo.responsables where id_responsable = ${idResponsable};`);
 }
 
 async function editResponsable(idResponsable: number, nombre?: string, cedula?: number, telefono?: string, correo?: string){
@@ -19,4 +20,4 @@ async function editResponsable(idResponsable: number, nombre?: string, cedula?: 
     );
 }
 
-export { getResponsables, editResponsable };
+export { getResponsables, getResponsableById, editResponsable };

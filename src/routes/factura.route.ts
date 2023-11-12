@@ -7,6 +7,6 @@ facturaRouter.get('/', getFacturasController);
 facturaRouter.post('/', newFacturaController);
 facturaRouter.patch('/',editFacturaController);
 
-facturaRouter.get('/p/', getFacturaByIdController);
+facturaRouter.get('/id/p/', getFacturaByIdController);
 
 export { facturaRouter };

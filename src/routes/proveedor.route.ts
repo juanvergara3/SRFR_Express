@@ -4,6 +4,6 @@ import { getProveedoresController, getProveedorByIdController } from "../control
 let proveedorRouter: Router =  express.Router();
 
 proveedorRouter.get('/', getProveedoresController);
-proveedorRouter.get('/p/', getProveedorByIdController);
+proveedorRouter.get('/id/p/', getProveedorByIdController);
 
 export { proveedorRouter };

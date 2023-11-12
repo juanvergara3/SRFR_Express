@@ -1,16 +1,15 @@
 import { runQueryAsync, executeProcedureAsync } from "./db.service";
-import { getOffset } from "../utils/helper.util";
-import { generalConfig } from "../configs/general.config";
 
-async function getUbicaciones(page = 1) {
-  // const listPerPage = generalConfig.listPerPageFacturas;
-  // const offset = getOffset(page, listPerPage);
-  
+async function getUbicaciones() {
   return await runQueryAsync(`select * from dbo.ubicaciones;`);
 }
 
 async function getUbicacionesByCliente(idCliente: number){
   return await runQueryAsync(`select * from dbo.ubicaciones where id_cliente = ${idCliente};`);
+}
+
+async function getUbicacionById(idUbicacion: number){
+  return await runQueryAsync(`select * from dbo.ubicaciones where id_ubicacion = ${idUbicacion};`);
 }
 
 async function editUbicacion(idUbicacion: number, idCliente?: number, nombre?: string, direccion?: string, telefono?: string){
@@ -25,4 +24,4 @@ async function editUbicacion(idUbicacion: number, idCliente?: number, nombre?: s
     );
 }
 
-export { getUbicaciones, getUbicacionesByCliente, editUbicacion };
+export { getUbicaciones, getUbicacionById, getUbicacionesByCliente, editUbicacion };

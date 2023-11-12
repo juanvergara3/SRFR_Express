@@ -4,6 +4,6 @@ import { getTiposController, getTipoByIdController } from "../controllers/tipo.c
 let tipoRouter: Router =  express.Router();
 
 tipoRouter.get('/', getTiposController);
-tipoRouter.get('/p/', getTipoByIdController);
+tipoRouter.get('/id/p/', getTipoByIdController);
 
 export { tipoRouter };

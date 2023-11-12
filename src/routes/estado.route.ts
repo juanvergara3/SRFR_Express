@@ -4,6 +4,6 @@ import { getEstadosController, getEstadoByIdController } from "../controllers/es
 let estadoRouter: Router =  express.Router();
 
 estadoRouter.get('/', getEstadosController);
-estadoRouter.get('/p/', getEstadoByIdController);
+estadoRouter.get('/id/p/', getEstadoByIdController);
 
 export { estadoRouter };
