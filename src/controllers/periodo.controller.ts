@@ -1,4 +1,4 @@
-import { getPeriodosByActivo } from "../services/periodo.service";
+import { getPeriodosByActivo, getLastPeriodoByActivo } from "../services/periodo.service";
 import { Request, Response, NextFunction } from "express";
 
 async function getPeriodosByActivoController(req:Request, res:Response, next:NextFunction) {
@@ -15,4 +15,18 @@ async function getPeriodosByActivoController(req:Request, res:Response, next:Nex
     }
 }
 
-export { getPeriodosByActivoController };
+async function getLastPeriodoByActivoController(req:Request, res:Response, next:NextFunction) {
+    try {
+
+        let idActivo = req.query.id_activo;
+
+        let result = await getLastPeriodoByActivo(Number(idActivo));
+        
+        res.json(result.recordset[0]);
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}
+
+export { getPeriodosByActivoController, getLastPeriodoByActivoController };

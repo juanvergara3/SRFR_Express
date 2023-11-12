@@ -1,11 +1,20 @@
 import { executeProcedureAsync, runQueryAsync } from "./db.service";
 
-async function getPeriodosByActivo(idActivo: number) { //done
+async function getPeriodosByActivo(idActivo: number) {
     return await runQueryAsync(
         `SELECT p.*
             FROM periodos p
             INNER JOIN activos_periodos ap ON p.id_periodo = ap.id_periodo
         WHERE ap.id_activo = ${idActivo};`
+    );
+}
+
+async function getLastPeriodoByActivo(idActivo: number) {
+    return await runQueryAsync(
+        `SELECT top 1 p.*
+            FROM periodos p
+            INNER JOIN activos_periodos ap ON p.id_periodo = ap.id_periodo
+        WHERE ap.id_activo = ${idActivo} order by fecha_fin desc;`
     );
 }
 
@@ -20,4 +29,4 @@ async function getPeriodosByActivo(idActivo: number) { //done
 //     );
 // }
 
-export { getPeriodosByActivo };
+export { getPeriodosByActivo, getLastPeriodoByActivo };
