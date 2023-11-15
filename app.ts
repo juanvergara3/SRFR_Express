@@ -20,6 +20,7 @@ import { estadoRouter } from "./src/routes/estado.route";
 import { proveedorRouter } from "./src/routes/proveedor.route";
 import { prestadorRouter } from "./src/routes/prestador.route";
 import { periodoRouter } from "./src/routes/periodo.route";
+import { entregaRouter } from "./src/routes/entrega.route";
 
 //app and port
 const app: Express = express();
@@ -56,6 +57,7 @@ app.use('/estados', estadoRouter);
 app.use('/proveedores', proveedorRouter);
 app.use('/prestadores', prestadorRouter);
 app.use('/periodos', periodoRouter);
+app.use('/entregas', entregaRouter);
 
 //404 catcher
 app.use(function(req, res, next) {
