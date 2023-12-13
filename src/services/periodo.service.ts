@@ -18,6 +18,12 @@ async function getLastPeriodoByActivo(idActivo: number) {
     );
 }
 
+async function getPeriodosByFactura(idFactura: number) {
+    return await runQueryAsync(
+        `select * from periodos where id_factura = ${idFactura};`
+    );
+}
+
 // async function editPeriodo(idPeriodo: number, idFactura?: number, fechaInicio?: string, fechaFin?: string) {
 
 //   return await runQueryAsync(
@@ -29,4 +35,4 @@ async function getLastPeriodoByActivo(idActivo: number) {
 //     );
 // }
 
-export { getPeriodosByActivo, getLastPeriodoByActivo };
+export { getPeriodosByActivo, getLastPeriodoByActivo, getPeriodosByFactura };

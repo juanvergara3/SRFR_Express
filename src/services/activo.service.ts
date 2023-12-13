@@ -19,4 +19,22 @@ async function getActivosByGrupo(idGrupo: number) {
   return await runQueryAsync(`select * from dbo.Activos where id_grupo = ${idGrupo};`);
 }
 
-export { getActivos, getActivosPendientes, getActivosByGrupo };
+async function getActivosByPeriodo(idPeriodo: number) {
+  return await runQueryAsync(
+    `SELECT a.*
+      FROM activos a
+      INNER JOIN activos_periodos ap ON a.id_activo = ap.id_activo
+    WHERE ap.id_periodo = ${idPeriodo};`
+  );
+}
+
+async function getActivosByEntrega(idEntrega: number) {
+  return await runQueryAsync(
+    `SELECT a.*
+      FROM activos a
+      INNER JOIN activos_entregas ap ON a.id_activo = ap.id_activo
+    WHERE ap.id_entrega = ${idEntrega};`
+  );
+}
+
+export { getActivos, getActivosPendientes, getActivosByGrupo, getActivosByPeriodo, getActivosByEntrega };

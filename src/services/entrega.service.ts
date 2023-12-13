@@ -9,6 +9,26 @@ async function getEntregasByActivo(idActivo: number) {
     );
 }
 
+async function getEntregasByResponsable(idResponsable: number) {
+  return await runQueryAsync(
+    `select * from entregas where id_responsable = ${idResponsable};`
+  );
+}
+
+async function getEntregasByUbicacion(idUbicacion: number) {
+  return await runQueryAsync(
+    `select * from entregas where id_ubicacion = ${idUbicacion};`
+  );
+}
+
+async function getEntregasByCliente(idCliente: number) {
+  return await runQueryAsync(
+    `select * from entregas where id_ubicacion in (
+      select id_ubicacion from ubicaciones where id_cliente = ${idCliente}
+    );`
+  );
+}
+
 async function newEntrega(idEntrega: number, idResponsable?: number, idUbicacion?: number, fechaEntrada?: string, fechaSalida?: string, idActivo?: number) { // NOT DONE
 
   return await runQueryAsync(
@@ -37,4 +57,4 @@ async function editEntrega(idEntrega: number, idResponsable?: number, idUbicacio
 //   );
 // }
 
-export { getEntregasByActivo, newEntrega, editEntrega };
+export { getEntregasByActivo, getEntregasByResponsable, getEntregasByUbicacion, getEntregasByCliente, newEntrega, editEntrega };
