@@ -1,4 +1,4 @@
-import { getEntregasByActivo, getEntregasByResponsable, getEntregasByUbicacion, getEntregasByCliente } from "../services/entrega.service"
+import { getEntregasByActivo, getEntregasByResponsable, getEntregasByUbicacion, getEntregasByCliente, getLastEntregaByActivo } from "../services/entrega.service"
 import { Request, Response, NextFunction } from "express";
 
 async function getEntregasByActivoController(req:Request, res:Response, next:NextFunction) {
@@ -53,4 +53,17 @@ async function getEntregasByClienteController(req:Request, res:Response, next:Ne
     }
 }
 
-export { getEntregasByActivoController, getEntregasByResponsableController, getEntregasByUbicacionController, getEntregasByClienteController };
+async function getLastEntregaByActivoController(req:Request, res:Response, next:NextFunction) {
+    try {
+        let idActivo = req.query.id_activo;
+
+        let result = await getLastEntregaByActivo(Number(idActivo));
+        
+        res.json(result.recordset[0]);
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}
+
+export { getEntregasByActivoController, getEntregasByResponsableController, getEntregasByUbicacionController, getEntregasByClienteController, getLastEntregaByActivoController };
