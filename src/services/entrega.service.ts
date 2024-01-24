@@ -38,11 +38,13 @@ async function getLastEntregaByActivo(idActivo: number) {
   );
 }
 
-async function newEntrega(idEntrega: number, idResponsable?: number, idUbicacion?: number, fechaEntrega?: string, fechaDevolucion?: string, idActivo?: number) { // NOT DONE
+async function newEntrega(idActivo: number, idResponsable: number, idUbicacion: number, fechaEntrega: string, fechaDevolucion?: string) {
 
   return await runQueryAsync(
     `insert into entregas (id_responsable, id_ubicacion, fecha_entrega, fecha_devolucion) values (${idResponsable}, ${idUbicacion}, '${fechaEntrega}', ${fechaDevolucion ? `'${fechaDevolucion}'` : null});
-    insert into activos_entregas (id_entrega, id_activo) values (${idEntrega}, ${idActivo});`
+      DECLARE @PK int;
+      SET @PK = SCOPE_IDENTITY();
+    insert into activos_entregas (id_entrega, id_activo) values (@PK, ${idActivo});`
   );
 }
 

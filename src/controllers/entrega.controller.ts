@@ -1,4 +1,4 @@
-import { getEntregasByActivo, getEntregasByResponsable, getEntregasByUbicacion, getEntregasByCliente, getLastEntregaByActivo } from "../services/entrega.service"
+import { getEntregasByActivo, getEntregasByResponsable, getEntregasByUbicacion, getEntregasByCliente, getLastEntregaByActivo, newEntrega } from "../services/entrega.service"
 import { Request, Response, NextFunction } from "express";
 
 async function getEntregasByActivoController(req:Request, res:Response, next:NextFunction) {
@@ -66,4 +66,22 @@ async function getLastEntregaByActivoController(req:Request, res:Response, next:
     }
 }
 
-export { getEntregasByActivoController, getEntregasByResponsableController, getEntregasByUbicacionController, getEntregasByClienteController, getLastEntregaByActivoController };
+async function newEntregaController(req:Request, res:Response, next:NextFunction) {
+    try {
+
+        let idActivo: number = req.body.id_activo;
+        let idResponsable: number = req.body.id_responsable;
+        let idUbicacion: number = req.body.id_ubicacion;
+        let fechaEntrega: string = req.body.fecha_entrega;
+        let fechaDevolucion: string = req.body.fecha_devolucion;
+        
+        let result = await newEntrega(idActivo, idResponsable, idUbicacion, fechaEntrega, fechaDevolucion);
+
+        res.json("Entrega creada con éxito.");
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+};
+
+export { getEntregasByActivoController, getEntregasByResponsableController, getEntregasByUbicacionController, getEntregasByClienteController, getLastEntregaByActivoController, newEntregaController };
