@@ -7,5 +7,6 @@ clienteRouter.get('/', controller.getClientesController);
 clienteRouter.get('/id/p/', controller.getClienteByIdController);
 clienteRouter.get('/ubicacion/p/', controller.getClienteByUbicacionController);
 clienteRouter.patch('/', controller.editClienteController);
+clienteRouter.post('/', controller.newClienteController);
 
 export { clienteRouter };

@@ -26,3 +26,8 @@ export async function editCliente(idCliente: number, nit?: number, digitoVerific
     );
 }
 
+export async function newCliente(nombre: string, nit: number, digitoVerificacion?: number) {
+  return await runQueryAsync(
+    `insert into clientes (nombre, nit, digito_verificacion) values ('${nombre}', ${nit}, ${digitoVerificacion ? `${digitoVerificacion}` : null});`
+  );
+}

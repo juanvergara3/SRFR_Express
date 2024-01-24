@@ -54,3 +54,18 @@ export async function editClienteController(req:Request, res:Response, next:Next
         next(err);
     }
 }
+
+export async function newClienteController(req:Request, res:Response, next:NextFunction) {
+    try {
+        let nombre: string = req.body.nombre;
+        let nit: number = req.body.nit;
+        let digitoVerificacion: number = req.body.digito_verificacion;
+        
+        let result = await service.newCliente(nombre, nit, digitoVerificacion);
+
+        res.json("Cliente creado con éxito.");
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}

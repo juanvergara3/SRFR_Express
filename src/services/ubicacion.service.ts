@@ -23,3 +23,9 @@ export async function editUbicacion(idUbicacion: number, idCliente?: number, nom
     WHERE id_ubicacion = ${idUbicacion};`
     );
 }
+
+export async function newUbicacion(idCliente: number, nombre: string, direccion: string, telefono?: string) {
+  return await runQueryAsync(
+    `insert into ubicaciones (id_cliente, nombre, direccion, telefono) values (${idCliente}, '${nombre}', '${direccion}',  ${telefono ? `'${telefono}'` : null});`
+  );
+}

@@ -55,3 +55,19 @@ export async function editUbicacionController(req:Request, res:Response, next:Ne
         next(err);
     }
 }
+
+export async function newUbicacionController(req:Request, res:Response, next:NextFunction) {
+    try {
+        let idCliente: number = req.body.id_cliente;
+        let nombre: string = req.body.nombre;
+        let direccion: string = req.body.direccion;
+        let telefono: string = req.body.telefono;
+        
+        let result = await service.newUbicacion(idCliente, nombre, direccion, telefono);
+
+        res.json("Ubicacion creada con éxito.");
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}
