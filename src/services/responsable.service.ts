@@ -1,14 +1,14 @@
-import { runQueryAsync, executeProcedureAsync } from "./db.service";
+import { runQueryAsync } from "./db.service";
 
-async function getResponsables() {
+export async function getResponsables() {
   return await runQueryAsync(`select * from dbo.responsables;`);
 }
 
-async function getResponsableById(idResponsable: number){
+export async function getResponsableById(idResponsable: number){
   return await runQueryAsync(`select * from dbo.responsables where id_responsable = ${idResponsable};`);
 }
 
-async function editResponsable(idResponsable: number, nombre?: string, cedula?: number, telefono?: string, correo?: string){
+export async function editResponsable(idResponsable: number, nombre?: string, cedula?: number, telefono?: string, correo?: string){
 
   return await runQueryAsync(
     `UPDATE dbo.responsables SET 
@@ -20,4 +20,8 @@ async function editResponsable(idResponsable: number, nombre?: string, cedula?: 
     );
 }
 
-export { getResponsables, getResponsableById, editResponsable };
+export async function newResponsable(nombre: string, cedula: number, telefono: string, correo: string) {
+  return await runQueryAsync(
+    `insert into responsables (nombre, cedula, telefono, correo) values ('${nombre}', ${cedula}, '${telefono}', '${correo}');`
+  );
+}

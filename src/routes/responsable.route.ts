@@ -1,10 +1,11 @@
 import express, { Router } from "express";
-import { getResponsablesController, getResponsableByIdController, editResponsableController } from "../controllers/responsable.controller";
+import * as controller from "../controllers/responsable.controller";
 
 let responsableRouter: Router =  express.Router();
 
-responsableRouter.get('/', getResponsablesController);
-responsableRouter.get('/id/p/', getResponsableByIdController);
-responsableRouter.patch('/', editResponsableController);
+responsableRouter.get('/', controller.getResponsablesController);
+responsableRouter.get('/id/p/', controller.getResponsableByIdController);
+responsableRouter.patch('/', controller.editResponsableController);
+responsableRouter.post('/', controller.newResponsableController);
 
 export { responsableRouter };
