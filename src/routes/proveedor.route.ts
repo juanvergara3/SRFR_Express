@@ -1,9 +1,9 @@
 import express, { Router } from "express";
-import { getProveedoresController, getProveedorByIdController } from "../controllers/proveedor.controller";
+import * as controller from "../controllers/proveedor.controller";
 
 let proveedorRouter: Router =  express.Router();
 
-proveedorRouter.get('/', getProveedoresController);
-proveedorRouter.get('/id/p/', getProveedorByIdController);
+proveedorRouter.get('/', controller.getProveedoresController);
+proveedorRouter.get('/id/p/', controller.getProveedorByIdController);
 
 export { proveedorRouter };

@@ -1,11 +1,11 @@
 import express, { Router } from "express";
-import { getClientesController, getClienteByIdController, getClienteByUbicacionController, editClienteController } from "../controllers/cliente.controller";
+import * as controller from "../controllers/cliente.controller";
 
 let clienteRouter: Router =  express.Router();
 
-clienteRouter.get('/', getClientesController);
-clienteRouter.get('/id/p/', getClienteByIdController);
-clienteRouter.get('/ubicacion/p/', getClienteByUbicacionController);
-clienteRouter.patch('/', editClienteController);
+clienteRouter.get('/', controller.getClientesController);
+clienteRouter.get('/id/p/', controller.getClienteByIdController);
+clienteRouter.get('/ubicacion/p/', controller.getClienteByUbicacionController);
+clienteRouter.patch('/', controller.editClienteController);
 
 export { clienteRouter };

@@ -2,7 +2,7 @@ import { executeProcedureAsync, runQueryAsync } from "./db.service";
 import { getOffset } from "../utils/helper.util";
 import { generalConfig } from "../configs/general.config";
 
-async function getFacturas(page = 1) {
+export async function getFacturas(page = 1) {
 
   const listPerPage = generalConfig.listPerPageFacturas;
   const offset = getOffset(page, listPerPage);
@@ -13,26 +13,26 @@ async function getFacturas(page = 1) {
   ]);
 }
 
-async function getFacturaById(idFactura: number) {
+export async function getFacturaById(idFactura: number) {
   return await runQueryAsync(
     `select * from dbo.facturas where id_factura = ${idFactura};`
   );
 }
 
-async function getLatestFacturas(cantidad: number) {
+export async function getLatestFacturas(cantidad: number) {
   return await runQueryAsync(
     `SELECT top ${cantidad} * FROM facturas order by fecha_generacion desc;`
   ); 
 }
 
-async function newFactura(numeroFactura: number, fechaGeneracion: string) {
+export async function newFactura(numeroFactura: number, fechaGeneracion: string) {
 
   return await runQueryAsync(
     `insert into dbo.facturas (numero_factura, fecha_generacion) values (${numeroFactura}, '${fechaGeneracion}');`
   );
 }
 
-async function editFactura(idFactura: number, numeroFactura?: number, fechaGeneracion?: string) {
+export async function editFactura(idFactura: number, numeroFactura?: number, fechaGeneracion?: string) {
 
   return await runQueryAsync(
     `UPDATE facturas SET 
@@ -41,5 +41,3 @@ async function editFactura(idFactura: number, numeroFactura?: number, fechaGener
     WHERE id_factura = ${idFactura};`
     );
 }
-
-export { getFacturas, getFacturaById, getLatestFacturas, newFactura, editFactura };

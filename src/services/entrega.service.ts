@@ -1,6 +1,6 @@
-import { executeProcedureAsync, runQueryAsync } from "./db.service";
+import { runQueryAsync } from "./db.service";
 
-async function getEntregasByActivo(idActivo: number) {
+export async function getEntregasByActivo(idActivo: number) {
     return await runQueryAsync(
         `SELECT e.*
             FROM entregas e
@@ -9,19 +9,19 @@ async function getEntregasByActivo(idActivo: number) {
     );
 }
 
-async function getEntregasByResponsable(idResponsable: number) {
+export async function getEntregasByResponsable(idResponsable: number) {
   return await runQueryAsync(
     `select * from entregas where id_responsable = ${idResponsable};`
   );
 }
 
-async function getEntregasByUbicacion(idUbicacion: number) {
+export async function getEntregasByUbicacion(idUbicacion: number) {
   return await runQueryAsync(
     `select * from entregas where id_ubicacion = ${idUbicacion};`
   );
 }
 
-async function getEntregasByCliente(idCliente: number) {
+export async function getEntregasByCliente(idCliente: number) {
   return await runQueryAsync(
     `select * from entregas where id_ubicacion in (
       select id_ubicacion from ubicaciones where id_cliente = ${idCliente}
@@ -29,7 +29,7 @@ async function getEntregasByCliente(idCliente: number) {
   );
 }
 
-async function getLastEntregaByActivo(idActivo: number) {
+export async function getLastEntregaByActivo(idActivo: number) {
   return await runQueryAsync(
       `SELECT top 1 e.*
         FROM entregas e
@@ -38,7 +38,7 @@ async function getLastEntregaByActivo(idActivo: number) {
   );
 }
 
-async function newEntrega(idActivo: number, idResponsable: number, idUbicacion: number, fechaEntrega: string, fechaDevolucion?: string) {
+export async function newEntrega(idActivo: number, idResponsable: number, idUbicacion: number, fechaEntrega: string, fechaDevolucion?: string) {
 
   return await runQueryAsync(
     `insert into entregas (id_responsable, id_ubicacion, fecha_entrega, fecha_devolucion) values (${idResponsable}, ${idUbicacion}, '${fechaEntrega}', ${fechaDevolucion ? `'${fechaDevolucion}'` : null});
@@ -48,7 +48,7 @@ async function newEntrega(idActivo: number, idResponsable: number, idUbicacion: 
   );
 }
 
-async function editEntrega(idEntrega: number, idResponsable?: number, idUbicacion?: number, fechaEntrega?: string, fechaDevolucion?: string) {
+export async function editEntrega(idEntrega: number, idResponsable?: number, idUbicacion?: number, fechaEntrega?: string, fechaDevolucion?: string) {
 
   return await runQueryAsync(
     `UPDATE entregas SET 
@@ -60,12 +60,10 @@ async function editEntrega(idEntrega: number, idResponsable?: number, idUbicacio
     );
 }
 
-// async function deleteEntrega(idEntrega: number) { //según las reglas de integridad no se permite el borrado de entregas
+// export async function deleteEntrega(idEntrega: number) { //según las reglas de integridad no se permite el borrado de entregas
     
 //   return await runQueryAsync(
 //     `delete from entregas where id_entrega = ${idEntrega};
 //     delete from entregas where id_entrega = ${idEntrega};`
 //   );
 // }
-
-export { getEntregasByActivo, getEntregasByResponsable, getEntregasByUbicacion, getEntregasByCliente, getLastEntregaByActivo, newEntrega, editEntrega };

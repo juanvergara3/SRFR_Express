@@ -1,22 +1,10 @@
 import { runQueryAsync } from "./db.service";
 
-async function getActivos() {
+export async function getActivos() {
   return await runQueryAsync(`select * from dbo.activos;`);
 }
 
-// async function getActivosPendientes() {
-//   return await runQueryAsync(
-//     `DECLARE @current_date AS DATE = GETDATE();
-
-//     SELECT a.*
-//     FROM activos a
-//       LEFT JOIN activos_periodos ap ON a.id_activo = ap.id_activo
-//       LEFT JOIN periodos p ON p.id_periodo = ap.id_periodo
-//     WHERE a.id_estado = 1 AND (DATEDIFF(month, COALESCE(p.fecha_fin, @current_date), @current_date) >= 1 OR p.id_periodo IS NULL);`
-//   );
-// }
-
-async function getActivosPendientes() {
+export async function getActivosPendientes() {
   return await runQueryAsync(
     `DECLARE @current_date AS DATE = GETDATE();
     SELECT a.*
@@ -39,11 +27,11 @@ async function getActivosPendientes() {
   );
 }
 
-async function getActivosByGrupo(idGrupo: number) {
+export async function getActivosByGrupo(idGrupo: number) {
   return await runQueryAsync(`select * from dbo.Activos where id_grupo = ${idGrupo};`);
 }
 
-async function getActivosByPeriodo(idPeriodo: number) {
+export async function getActivosByPeriodo(idPeriodo: number) {
   return await runQueryAsync(
     `SELECT a.*
       FROM activos a
@@ -52,7 +40,7 @@ async function getActivosByPeriodo(idPeriodo: number) {
   );
 }
 
-async function getActivosByEntrega(idEntrega: number) {
+export async function getActivosByEntrega(idEntrega: number) {
   return await runQueryAsync(
     `SELECT a.*
       FROM activos a
@@ -60,5 +48,3 @@ async function getActivosByEntrega(idEntrega: number) {
     WHERE ap.id_entrega = ${idEntrega};`
   );
 }
-
-export { getActivos, getActivosPendientes, getActivosByGrupo, getActivosByPeriodo, getActivosByEntrega };

@@ -1,13 +1,13 @@
 import express, { Router } from "express";
-import { getFacturasController, getFacturaByIdController, getLatestFacturasController, newFacturaController, editFacturaController } from "../controllers/factura.controller";
+import * as controller from "../controllers/factura.controller";
 
 let facturaRouter: Router =  express.Router();
 
-facturaRouter.get('/', getFacturasController);
-facturaRouter.post('/', newFacturaController);
-facturaRouter.patch('/', editFacturaController);
+facturaRouter.get('/', controller.getFacturasController);
+facturaRouter.post('/', controller.newFacturaController);
+facturaRouter.patch('/', controller.editFacturaController);
 
-facturaRouter.get('/id/p/', getFacturaByIdController);
-facturaRouter.get('/latest/p/', getLatestFacturasController);
+facturaRouter.get('/id/p/', controller.getFacturaByIdController);
+facturaRouter.get('/latest/p/', controller.getLatestFacturasController);
 
 export { facturaRouter };

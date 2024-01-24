@@ -1,14 +1,14 @@
-import { runQueryAsync, executeProcedureAsync } from "./db.service";
+import { runQueryAsync } from "./db.service";
 
-async function getClientes() {
+export async function getClientes() {
   return await runQueryAsync(`select * from dbo.clientes;`);
 }
 
-async function getClienteById(idCliente: number) {
+export async function getClienteById(idCliente: number) {
   return await runQueryAsync(`select * from dbo.clientes where id_cliente = ${idCliente};`);
 }
 
-async function getClienteByUbicacion(idUbicacion: number){
+export async function getClienteByUbicacion(idUbicacion: number){
   return await runQueryAsync(
     `SELECT Clientes.*
       FROM Clientes
@@ -16,8 +16,7 @@ async function getClienteByUbicacion(idUbicacion: number){
     WHERE Ubicaciones.id_ubicacion = ${idUbicacion};`);
 }
 
-async function editCliente(idCliente: number, nit?: number, digitoVerificacion?: number, nombre?: string) {
-
+export async function editCliente(idCliente: number, nit?: number, digitoVerificacion?: number, nombre?: string) {
   return await runQueryAsync(
     `UPDATE dbo.clientes SET 
       nit = COALESCE(${nit ? `${nit}` : null}, nit), 
@@ -27,4 +26,3 @@ async function editCliente(idCliente: number, nit?: number, digitoVerificacion?:
     );
 }
 
-export { getClientes, getClienteById, editCliente, getClienteByUbicacion };

@@ -1,9 +1,9 @@
-import { getTipos, getTipoById } from "../services/tipo.service";
 import { Request, Response, NextFunction } from "express";
+import * as service from "../services/tipo.service";
 
-async function getTiposController(req:Request, res:Response, next:NextFunction) {
+export async function getTiposController(req:Request, res:Response, next:NextFunction) {
     try {
-        let result = await getTipos();
+        let result = await service.getTipos();
         
         res.json(result.recordset);
     } catch (err) {
@@ -12,12 +12,11 @@ async function getTiposController(req:Request, res:Response, next:NextFunction) 
     }
 }
 
-async function getTipoByIdController(req:Request, res:Response, next:NextFunction) {
+export async function getTipoByIdController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idTipo = req.query.idTipo;
 
-        let result = await getTipoById(Number(idTipo));
+        let result = await service.getTipoById(Number(idTipo));
         
         res.json(result.recordset[0]);
     } catch (err) {
@@ -25,5 +24,3 @@ async function getTipoByIdController(req:Request, res:Response, next:NextFunctio
         next(err);
     }
 }
-
-export { getTiposController, getTipoByIdController };

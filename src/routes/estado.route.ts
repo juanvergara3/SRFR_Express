@@ -1,9 +1,9 @@
 import express, { Router } from "express";
-import { getEstadosController, getEstadoByIdController } from "../controllers/estado.controller";
+import * as controller from "../controllers/estado.controller";
 
 let estadoRouter: Router =  express.Router();
 
-estadoRouter.get('/', getEstadosController);
-estadoRouter.get('/id/p/', getEstadoByIdController);
+estadoRouter.get('/', controller.getEstadosController);
+estadoRouter.get('/id/p/', controller.getEstadoByIdController);
 
 export { estadoRouter };

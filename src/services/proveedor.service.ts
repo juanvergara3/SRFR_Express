@@ -1,11 +1,9 @@
-import { runQueryAsync, executeProcedureAsync } from "./db.service";
+import { runQueryAsync } from "./db.service";
 
-async function getProveedores() {
+export async function getProveedores() {
   return await runQueryAsync(`select * from dbo.proveedores;`);
 }
 
-async function getProveedorById(idProveedor: number) {
+export async function getProveedorById(idProveedor: number) {
   return await runQueryAsync(`select * from dbo.proveedores where id_proveedor = ${idProveedor};`);
 }
-
-export { getProveedores, getProveedorById };

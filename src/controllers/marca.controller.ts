@@ -1,9 +1,9 @@
-import { getMarcas, getMarcaById } from "../services/marca.service";
 import { Request, Response, NextFunction } from "express";
+import * as service from "../services/marca.service";
 
-async function getMarcasController(req:Request, res:Response, next:NextFunction) {
+export async function getMarcasController(req:Request, res:Response, next:NextFunction) {
     try {
-        let result = await getMarcas();
+        let result = await service.getMarcas();
         
         res.json(result.recordset);
     } catch (err) {
@@ -12,12 +12,11 @@ async function getMarcasController(req:Request, res:Response, next:NextFunction)
     }
 }
 
-async function getMarcaByIdController(req:Request, res:Response, next:NextFunction) {
+export async function getMarcaByIdController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idMarca = req.query.idMarca;
 
-        let result = await getMarcaById(Number(idMarca));
+        let result = await service.getMarcaById(Number(idMarca));
         
         res.json(result.recordset[0]);
     } catch (err) {
@@ -25,5 +24,3 @@ async function getMarcaByIdController(req:Request, res:Response, next:NextFuncti
         next(err);
     }
 }
-
-export { getMarcasController, getMarcaByIdController };

@@ -1,11 +1,11 @@
 import express, { Router } from "express";
-import { getActivosController, getActivosPendientesController, getActivosByGrupoController, getActivosByPeriodoController, getActivosByEntregaController } from "../controllers/activo.controller";
+import * as controller from "../controllers/activo.controller";
 let activoRouter: Router =  express.Router();
 
-activoRouter.get('/', getActivosController);
-activoRouter.get('/p/', getActivosByGrupoController);
-activoRouter.get('/pendientes', getActivosPendientesController);
-activoRouter.get('/periodo/p/', getActivosByPeriodoController);
-activoRouter.get('/entrega/p/', getActivosByEntregaController);
+activoRouter.get('/', controller.getActivosController);
+activoRouter.get('/p/', controller.getActivosByGrupoController);
+activoRouter.get('/pendientes', controller.getActivosPendientesController);
+activoRouter.get('/periodo/p/', controller.getActivosByPeriodoController);
+activoRouter.get('/entrega/p/', controller.getActivosByEntregaController);
 
 export { activoRouter };

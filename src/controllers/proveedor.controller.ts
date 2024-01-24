@@ -1,9 +1,9 @@
-import { getProveedores, getProveedorById } from "../services/proveedor.service";
 import { Request, Response, NextFunction } from "express";
+import * as service from "../services/proveedor.service";
 
-async function getProveedoresController(req:Request, res:Response, next:NextFunction) {
+export async function getProveedoresController(req:Request, res:Response, next:NextFunction) {
     try {
-        let result = await getProveedores();
+        let result = await service.getProveedores();
         
         res.json(result.recordset);
     } catch (err) {
@@ -12,12 +12,11 @@ async function getProveedoresController(req:Request, res:Response, next:NextFunc
     }
 }
 
-async function getProveedorByIdController(req:Request, res:Response, next:NextFunction) {
+export async function getProveedorByIdController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idProveedor = req.query.idProveedor;
 
-        let result = await getProveedorById(Number(idProveedor));
+        let result = await service.getProveedorById(Number(idProveedor));
         
         res.json(result.recordset[0]);
     } catch (err) {
@@ -25,5 +24,3 @@ async function getProveedorByIdController(req:Request, res:Response, next:NextFu
         next(err);
     }
 }
-
-export { getProveedoresController, getProveedorByIdController };

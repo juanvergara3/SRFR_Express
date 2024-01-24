@@ -1,11 +1,9 @@
-import { runQueryAsync, executeProcedureAsync } from "./db.service";
+import { runQueryAsync } from "./db.service";
 
-async function getMarcas() {
+export async function getMarcas() {
   return await runQueryAsync(`select * from dbo.marcas;`);
 }
 
-async function getMarcaById(idMarca: number) {
+export async function getMarcaById(idMarca: number) {
   return await runQueryAsync(`select * from dbo.marcas where id_marca = ${idMarca};`);
 }
-
-export { getMarcas, getMarcaById };

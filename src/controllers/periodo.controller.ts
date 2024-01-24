@@ -1,12 +1,11 @@
-import { getPeriodosByActivo, getLastPeriodoByActivo, getPeriodosByFactura } from "../services/periodo.service";
 import { Request, Response, NextFunction } from "express";
+import * as service from "../services/periodo.service";
 
-async function getPeriodosByActivoController(req:Request, res:Response, next:NextFunction) {
+export async function getPeriodosByActivoController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idActivo = req.query.id_activo;
 
-        let result = await getPeriodosByActivo(Number(idActivo));
+        let result = await service.getPeriodosByActivo(Number(idActivo));
         
         res.json(result.recordset);
     } catch (err) {
@@ -15,12 +14,11 @@ async function getPeriodosByActivoController(req:Request, res:Response, next:Nex
     }
 }
 
-async function getLastPeriodoByActivoController(req:Request, res:Response, next:NextFunction) {
+export async function getLastPeriodoByActivoController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idActivo = req.query.id_activo;
 
-        let result = await getLastPeriodoByActivo(Number(idActivo));
+        let result = await service.getLastPeriodoByActivo(Number(idActivo));
         
         res.json(result.recordset[0]);
     } catch (err) {
@@ -29,12 +27,11 @@ async function getLastPeriodoByActivoController(req:Request, res:Response, next:
     }
 }
 
-async function getPeriodosByFacturaController(req:Request, res:Response, next:NextFunction) {
+export async function getPeriodosByFacturaController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idFactura = req.query.id_factura;
 
-        let result = await getPeriodosByFactura(Number(idFactura));
+        let result = await service.getPeriodosByFactura(Number(idFactura));
         
         res.json(result.recordset);
     } catch (err) {
@@ -42,5 +39,3 @@ async function getPeriodosByFacturaController(req:Request, res:Response, next:Ne
         next(err);
     }
 }
-
-export { getPeriodosByActivoController, getLastPeriodoByActivoController, getPeriodosByFacturaController };

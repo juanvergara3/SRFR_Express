@@ -1,10 +1,11 @@
 import express, { Router } from "express";
-import { getUbicacionesController, getUbicacionByIdController, getUbicacionesByClienteController, editUbicacionController } from "../controllers/ubicacion.controller";
+import * as controller from "../controllers/ubicacion.controller";
+
 let ubicacionRouter: Router =  express.Router();
 
-ubicacionRouter.get('/', getUbicacionesController);
-ubicacionRouter.get('/id/p/', getUbicacionByIdController);
-ubicacionRouter.get('/p/', getUbicacionesByClienteController);
-ubicacionRouter.patch('/', editUbicacionController);
+ubicacionRouter.get('/', controller.getUbicacionesController);
+ubicacionRouter.get('/id/p/', controller.getUbicacionByIdController);
+ubicacionRouter.get('/p/', controller.getUbicacionesByClienteController);
+ubicacionRouter.patch('/', controller.editUbicacionController);
 
 export { ubicacionRouter };

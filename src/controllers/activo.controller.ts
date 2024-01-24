@@ -1,9 +1,9 @@
-import { getActivos, getActivosPendientes, getActivosByGrupo, getActivosByPeriodo, getActivosByEntrega } from "../services/activo.service";
 import { Request, Response, NextFunction } from "express";
+import * as service from "../services/activo.service";
 
-async function getActivosController(req:Request, res:Response, next:NextFunction) { //make this async somehow
+export async function getActivosController(req:Request, res:Response, next:NextFunction) {
     try {
-        let result = await getActivos();
+        let result = await service.getActivos();
         
         res.json(result.recordset);
     } catch (err) {
@@ -12,9 +12,9 @@ async function getActivosController(req:Request, res:Response, next:NextFunction
     }
 }
 
-async function getActivosPendientesController(req:Request, res:Response, next:NextFunction){
+export async function getActivosPendientesController(req:Request, res:Response, next:NextFunction) {
     try {
-        let result = await getActivosPendientes();
+        let result = await service.getActivosPendientes();
         
         res.json(result.recordset);
     } catch (err) {
@@ -23,12 +23,11 @@ async function getActivosPendientesController(req:Request, res:Response, next:Ne
     }
 }
 
-async function getActivosByGrupoController(req:Request, res:Response, next:NextFunction) {
+export async function getActivosByGrupoController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idGrupo = req.query.idGrupo;
 
-        let result = await getActivosByGrupo(Number(idGrupo));
+        let result = await service.getActivosByGrupo(Number(idGrupo));
         
         res.json(result.recordset);
     } catch (err) {
@@ -37,12 +36,11 @@ async function getActivosByGrupoController(req:Request, res:Response, next:NextF
     }
 }
 
-async function getActivosByPeriodoController(req:Request, res:Response, next:NextFunction) {
+export async function getActivosByPeriodoController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idPeriodo = req.query.id_periodo;
 
-        let result = await getActivosByPeriodo(Number(idPeriodo));
+        let result = await service.getActivosByPeriodo(Number(idPeriodo));
         
         res.json(result.recordset);
     } catch (err) {
@@ -51,12 +49,11 @@ async function getActivosByPeriodoController(req:Request, res:Response, next:Nex
     }
 }
 
-async function getActivosByEntregaController(req:Request, res:Response, next:NextFunction) {
+export async function getActivosByEntregaController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idEntrega = req.query.id_entrega;
 
-        let result = await getActivosByEntrega(Number(idEntrega));
+        let result = await service.getActivosByEntrega(Number(idEntrega));
         
         res.json(result.recordset);
     } catch (err) {
@@ -64,5 +61,3 @@ async function getActivosByEntregaController(req:Request, res:Response, next:Nex
         next(err);
     }
 }
-
-export { getActivosController, getActivosPendientesController, getActivosByGrupoController, getActivosByPeriodoController, getActivosByEntregaController };

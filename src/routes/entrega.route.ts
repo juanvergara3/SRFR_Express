@@ -1,12 +1,12 @@
 import express, { Router } from "express";
-import { getEntregasByActivoController, getEntregasByResponsableController, getEntregasByUbicacionController, getEntregasByClienteController, getLastEntregaByActivoController, newEntregaController } from "../controllers/entrega.controller";
+import * as controller from "../controllers/entrega.controller";
 let entregaRouter: Router =  express.Router();
 
-entregaRouter.get('/p/', getEntregasByActivoController);
-entregaRouter.get('/responsable/p/', getEntregasByResponsableController);
-entregaRouter.get('/ubicacion/p/', getEntregasByUbicacionController);
-entregaRouter.get('/cliente/p/', getEntregasByClienteController);
-entregaRouter.get('/latest/p/', getLastEntregaByActivoController);
-entregaRouter.post('/', newEntregaController);
+entregaRouter.get('/p/', controller.getEntregasByActivoController);
+entregaRouter.get('/responsable/p/', controller.getEntregasByResponsableController);
+entregaRouter.get('/ubicacion/p/', controller.getEntregasByUbicacionController);
+entregaRouter.get('/cliente/p/', controller.getEntregasByClienteController);
+entregaRouter.get('/latest/p/', controller.getLastEntregaByActivoController);
+entregaRouter.post('/', controller.newEntregaController);
 
 export { entregaRouter };

@@ -1,8 +1,8 @@
 import express, { Router } from "express";
-import { getGruposController } from "../controllers/grupo.controller";
+import * as controller from "../controllers/grupo.controller";
 
 let grupoRouter: Router =  express.Router();
 
-grupoRouter.get('/', getGruposController);
+grupoRouter.get('/', controller.getGruposController);
 
 export { grupoRouter };

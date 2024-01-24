@@ -1,18 +1,18 @@
-import { runQueryAsync, executeProcedureAsync } from "./db.service";
+import { runQueryAsync } from "./db.service";
 
-async function getUbicaciones() {
+export async function getUbicaciones() {
   return await runQueryAsync(`select * from dbo.ubicaciones;`);
 }
 
-async function getUbicacionesByCliente(idCliente: number){
+export async function getUbicacionesByCliente(idCliente: number){
   return await runQueryAsync(`select * from dbo.ubicaciones where id_cliente = ${idCliente};`);
 }
 
-async function getUbicacionById(idUbicacion: number){
+export async function getUbicacionById(idUbicacion: number){
   return await runQueryAsync(`select * from dbo.ubicaciones where id_ubicacion = ${idUbicacion};`);
 }
 
-async function editUbicacion(idUbicacion: number, idCliente?: number, nombre?: string, direccion?: string, telefono?: string){
+export async function editUbicacion(idUbicacion: number, idCliente?: number, nombre?: string, direccion?: string, telefono?: string){
 
   return await runQueryAsync(
     `UPDATE dbo.ubicaciones SET 
@@ -23,5 +23,3 @@ async function editUbicacion(idUbicacion: number, idCliente?: number, nombre?: s
     WHERE id_ubicacion = ${idUbicacion};`
     );
 }
-
-export { getUbicaciones, getUbicacionById, getUbicacionesByCliente, editUbicacion };

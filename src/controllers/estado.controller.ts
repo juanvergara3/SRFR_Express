@@ -1,9 +1,9 @@
-import { getEstados, getEstadoById } from "../services/estado.service";
 import { Request, Response, NextFunction } from "express";
+import * as service from "../services/estado.service";
 
-async function getEstadosController(req:Request, res:Response, next:NextFunction) {
+export async function getEstadosController(req:Request, res:Response, next:NextFunction) {
     try {
-        let result = await getEstados();
+        let result = await service.getEstados();
         
         res.json(result.recordset);
     } catch (err) {
@@ -12,12 +12,11 @@ async function getEstadosController(req:Request, res:Response, next:NextFunction
     }
 }
 
-async function getEstadoByIdController(req:Request, res:Response, next:NextFunction) {
+export async function getEstadoByIdController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idEstado = req.query.idEstado;
 
-        let result = await getEstadoById(Number(idEstado));
+        let result = await service.getEstadoById(Number(idEstado));
         
         res.json(result.recordset[0]);
     } catch (err) {
@@ -25,5 +24,3 @@ async function getEstadoByIdController(req:Request, res:Response, next:NextFunct
         next(err);
     }
 }
-
-export { getEstadosController, getEstadoByIdController };

@@ -1,9 +1,9 @@
-import { getPrestadores, getPrestadorById } from "../services/prestador.service";
 import { Request, Response, NextFunction } from "express";
+import * as service from "../services/prestador.service";
 
-async function getPrestadoresController(req:Request, res:Response, next:NextFunction) {
+export async function getPrestadoresController(req:Request, res:Response, next:NextFunction) {
     try {
-        let result = await getPrestadores();
+        let result = await service.getPrestadores();
         
         res.json(result.recordset);
     } catch (err) {
@@ -12,12 +12,11 @@ async function getPrestadoresController(req:Request, res:Response, next:NextFunc
     }
 }
 
-async function getPrestadorByIdController(req:Request, res:Response, next:NextFunction) {
+export async function getPrestadorByIdController(req:Request, res:Response, next:NextFunction) {
     try {
-
         let idPrestador = req.query.idPrestador;
 
-        let result = await getPrestadorById(Number(idPrestador));
+        let result = await service.getPrestadorById(Number(idPrestador));
         
         res.json(result.recordset[0]);
     } catch (err) {
@@ -25,5 +24,3 @@ async function getPrestadorByIdController(req:Request, res:Response, next:NextFu
         next(err);
     }
 }
-
-export { getPrestadoresController, getPrestadorByIdController };

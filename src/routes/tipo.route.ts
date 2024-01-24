@@ -1,9 +1,9 @@
 import express, { Router } from "express";
-import { getTiposController, getTipoByIdController } from "../controllers/tipo.controller";
+import * as controller from "../controllers/tipo.controller";
 
 let tipoRouter: Router =  express.Router();
 
-tipoRouter.get('/', getTiposController);
-tipoRouter.get('/id/p/', getTipoByIdController);
+tipoRouter.get('/', controller.getTiposController);
+tipoRouter.get('/id/p/', controller.getTipoByIdController);
 
 export { tipoRouter };

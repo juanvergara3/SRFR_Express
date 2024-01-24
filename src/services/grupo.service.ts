@@ -1,8 +1,5 @@
-import { runQueryAsync, executeProcedureAsync } from "./db.service";
+import { runQueryAsync } from "./db.service";
 
-async function getGrupos() {
-  
+export async function getGrupos() {
   return await runQueryAsync(`select * from dbo.grupos;`);
 }
-
-export { getGrupos};

@@ -1,6 +1,6 @@
-import { executeProcedureAsync, runQueryAsync } from "./db.service";
+import { runQueryAsync } from "./db.service";
 
-async function getPeriodosByActivo(idActivo: number) {
+export async function getPeriodosByActivo(idActivo: number) {
     return await runQueryAsync(
         `SELECT p.*
             FROM periodos p
@@ -9,7 +9,7 @@ async function getPeriodosByActivo(idActivo: number) {
     );
 }
 
-async function getLastPeriodoByActivo(idActivo: number) {
+export async function getLastPeriodoByActivo(idActivo: number) {
     return await runQueryAsync(
         `SELECT top 1 p.*
             FROM periodos p
@@ -18,13 +18,13 @@ async function getLastPeriodoByActivo(idActivo: number) {
     );
 }
 
-async function getPeriodosByFactura(idFactura: number) {
+export async function getPeriodosByFactura(idFactura: number) {
     return await runQueryAsync(
         `select * from periodos where id_factura = ${idFactura};`
     );
 }
 
-// async function editPeriodo(idPeriodo: number, idFactura?: number, fechaInicio?: string, fechaFin?: string) {
+// export async function editPeriodo(idPeriodo: number, idFactura?: number, fechaInicio?: string, fechaFin?: string) {
 
 //   return await runQueryAsync(
 //     `UPDATE peridos SET 
@@ -34,5 +34,3 @@ async function getPeriodosByFactura(idFactura: number) {
 //     WHERE id_entrega = ${idPeriodo};`
 //     );
 // }
-
-export { getPeriodosByActivo, getLastPeriodoByActivo, getPeriodosByFactura };
