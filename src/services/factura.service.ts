@@ -19,6 +19,12 @@ async function getFacturaById(idFactura: number) {
   );
 }
 
+async function getLatestFacturas(cantidad: number) {
+  return await runQueryAsync(
+    `SELECT top ${cantidad} * FROM facturas order by fecha_generacion desc;`
+  ); 
+}
+
 async function newFactura(numeroFactura: number, fechaGeneracion: string) {
 
   return await runQueryAsync(
@@ -36,4 +42,4 @@ async function editFactura(idFactura: number, numeroFactura?: number, fechaGener
     );
 }
 
-export { getFacturas, getFacturaById, newFactura, editFactura };
+export { getFacturas, getFacturaById, getLatestFacturas, newFactura, editFactura };

@@ -1,9 +1,8 @@
-import { getFacturas, getFacturaById, newFactura, editFactura } from "../services/factura.service";
+import { getFacturas, getFacturaById, getLatestFacturas, newFactura, editFactura } from "../services/factura.service";
 import { Request, Response, NextFunction } from "express";
 
-async function getFacturasController(req:Request, res:Response, next:NextFunction) { //make this async somehow
+async function getFacturasController(req:Request, res:Response, next:NextFunction) { 
     try {
-        //let result = await getEstados(Number(req.query.page)); //this req.query.page needs to be studied
         let result = await getFacturas(1);
         
         res.json(result.recordset);
@@ -26,7 +25,20 @@ async function getFacturaByIdController(req:Request, res:Response, next:NextFunc
     }
 }
 
-async function newFacturaController(req:Request, res:Response, next:NextFunction) { //make this async somehow
+async function getLatestFacturasController(req:Request, res:Response, next:NextFunction) {
+    try {
+        let cantidadFacturas =  req.query.cantidadFacturas;
+
+        let result = await getLatestFacturas(Number(cantidadFacturas));
+        
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}
+
+async function newFacturaController(req:Request, res:Response, next:NextFunction) {
     try {
 
         let numeroFactura = req.body.numero_factura;
@@ -41,7 +53,7 @@ async function newFacturaController(req:Request, res:Response, next:NextFunction
     }
 };
 
-async function editFacturaController(req:Request, res:Response, next:NextFunction) { //make this async somehow
+async function editFacturaController(req:Request, res:Response, next:NextFunction) {
     try {
 
         let idFactura = req.body.id_factura;
@@ -57,4 +69,4 @@ async function editFacturaController(req:Request, res:Response, next:NextFunctio
     }
 };
 
-export { getFacturasController, getFacturaByIdController, newFacturaController, editFacturaController };
+export { getFacturasController, getFacturaByIdController, getLatestFacturasController, newFacturaController, editFacturaController };

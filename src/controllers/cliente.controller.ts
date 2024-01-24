@@ -1,4 +1,4 @@
-import { getClientes, getClienteById, editCliente } from "../services/cliente.service";
+import { getClientes, getClienteById, getClienteByUbicacion, editCliente } from "../services/cliente.service";
 import { Request, Response, NextFunction } from "express";
 
 async function getClientesController(req:Request, res:Response, next:NextFunction) {
@@ -26,6 +26,19 @@ async function getClienteByIdController(req:Request, res:Response, next:NextFunc
     }
 }
 
+async function getClienteByUbicacionController(req:Request, res:Response, next:NextFunction) {
+    try {
+        let idUbicacion = req.query.id_ubicacion;
+
+        let result = await getClienteByUbicacion(Number(idUbicacion));
+        
+        res.json(result.recordset[0]);
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}
+
 async function editClienteController(req:Request, res:Response, next:NextFunction) {
     try {
 
@@ -43,4 +56,4 @@ async function editClienteController(req:Request, res:Response, next:NextFunctio
     }
 }
 
-export { getClientesController, getClienteByIdController, editClienteController };
+export { getClientesController, getClienteByIdController, getClienteByUbicacionController, editClienteController };

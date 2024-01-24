@@ -4,11 +4,19 @@ async function getClientes() {
   return await runQueryAsync(`select * from dbo.clientes;`);
 }
 
-async function getClienteById(idCliente: number){
+async function getClienteById(idCliente: number) {
   return await runQueryAsync(`select * from dbo.clientes where id_cliente = ${idCliente};`);
 }
 
-async function editCliente(idCliente: number, nit?: number, digitoVerificacion?: number, nombre?: string){
+async function getClienteByUbicacion(idUbicacion: number){
+  return await runQueryAsync(
+    `SELECT Clientes.*
+      FROM Clientes
+      JOIN Ubicaciones ON Clientes.id_cliente = Ubicaciones.id_cliente
+    WHERE Ubicaciones.id_ubicacion = ${idUbicacion};`);
+}
+
+async function editCliente(idCliente: number, nit?: number, digitoVerificacion?: number, nombre?: string) {
 
   return await runQueryAsync(
     `UPDATE dbo.clientes SET 
@@ -19,4 +27,4 @@ async function editCliente(idCliente: number, nit?: number, digitoVerificacion?:
     );
 }
 
-export { getClientes, getClienteById, editCliente };
+export { getClientes, getClienteById, editCliente, getClienteByUbicacion };
