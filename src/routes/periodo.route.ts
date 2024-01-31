@@ -6,5 +6,6 @@ let periodoRouter: Router =  express.Router();
 periodoRouter.get('/p/', controller.getPeriodosByActivoController);
 periodoRouter.get('/latest/p/', controller.getLastPeriodoByActivoController);
 periodoRouter.get('/factura/p/', controller.getPeriodosByFacturaController);
+periodoRouter.post('/pendientes/p/', controller.newPeriodosBulkController);
 
 export { periodoRouter };

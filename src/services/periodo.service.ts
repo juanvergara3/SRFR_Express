@@ -24,6 +24,22 @@ export async function getPeriodosByFactura(idFactura: number) {
     );
 }
 
+export async function newPeriodosBulk(idFactura: number, fechaInicio: string, fechaFin: string, idsActivos: number[]) {
+
+    let query = `DECLARE @PK int;
+        insert into periodos (id_factura, fecha_inicio, fecha_fin) values (${idFactura}, '${fechaInicio}', '${fechaFin}');
+        SET @PK = SCOPE_IDENTITY();
+        insert into activos_periodos (id_periodo, id_activo) values `
+
+    for (const idActivo of idsActivos) {
+        query = query.concat(`(@PK, ${idActivo}), `);
+    }
+
+    query = query.slice(0, query.length - 2).concat(';');
+
+    return await runQueryAsync(query);
+}
+
 // export async function editPeriodo(idPeriodo: number, idFactura?: number, fechaInicio?: string, fechaFin?: string) {
 
 //   return await runQueryAsync(

@@ -39,3 +39,19 @@ export async function getPeriodosByFacturaController(req:Request, res:Response, 
         next(err);
     }
 }
+
+export async function newPeriodosBulkController(req:Request, res:Response, next:NextFunction) {
+    try {
+        let idFactura: number = req.body.id_factura;
+        let fechaInicio: string = req.body.fecha_inicio;
+        let fechaFin: string = req.body.fecha_fin;
+        let idsActivos: number[] = req.body.ids_activos;
+        
+        let result = await service.newPeriodosBulk(idFactura, fechaInicio, fechaFin, idsActivos);
+
+        res.json("Activos facturados con éxito.");
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}
