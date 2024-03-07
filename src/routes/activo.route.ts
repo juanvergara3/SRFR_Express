@@ -7,5 +7,6 @@ activoRouter.get('/p/', controller.getActivosByGrupoController);
 activoRouter.get('/pendientes', controller.getActivosPendientesController);
 activoRouter.get('/periodo/p/', controller.getActivosByPeriodoController);
 activoRouter.get('/entrega/p/', controller.getActivosByEntregaController);
+activoRouter.post('/', controller.newActivoController);
 
 export { activoRouter };

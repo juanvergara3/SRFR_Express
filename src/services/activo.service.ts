@@ -48,3 +48,15 @@ export async function getActivosByEntrega(idEntrega: number) {
     WHERE ap.id_entrega = ${idEntrega};`
   );
 }
+
+export async function newActivo(numeroSerie: string, modelo: string, facturaCompra: string, fechaCompra: string, valor: number, precioRenta: number, 
+                                idMarca: number, idProveedor: number, idPrestador: number, idTipo: number, idEstado: number, idGrupo?: number) {
+  return await runQueryAsync(
+    `insert into activos 
+      (numero_serie, modelo, factura_compra, fecha_compra, valor, precio_renta, 
+      id_marca, id_proveedor, id_prestador, id_tipo, id_estado, id_grupo)
+    values 
+      ('${numeroSerie}', '${modelo}', '${facturaCompra}', '${fechaCompra}', ${valor}, ${precioRenta}, 
+      ${idMarca}, ${idProveedor}, ${idPrestador}, ${idTipo}, ${idEstado}, ${idGrupo ? `${idGrupo}` : null});`
+  );
+}
