@@ -1,4 +1,5 @@
 const dbConfig = {
+    // server: '192.168.5.44', //This is for when the code is run as a container, localhost won't work, it needs the ip of the machine hosting the database.
     server: 'localhost',
     port: 1433,
     user: 'srfrUser',
