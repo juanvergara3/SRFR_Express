@@ -12,6 +12,19 @@ export async function getGruposController(req:Request, res:Response, next:NextFu
     }
 }
 
+export async function getGrupoByIdController(req:Request, res:Response, next:NextFunction) {
+    try {
+        let idGrupo = req.query.idGrupo;
+
+        let result = await service.getGrupoById(Number(idGrupo));
+        
+        res.json(result.recordset[0]);
+    } catch (err) {
+        console.error(`Error executing query`);
+        next(err);
+    }
+}
+
 export async function newGrupoController(req:Request, res:Response, next:NextFunction) {
     try {
         let nombre: string = req.body.nombre;

@@ -49,6 +49,25 @@ export async function getActivosByEntrega(idEntrega: number) {
   );
 }
 
+export async function editActivo(idActivo: number, numeroSerie?: string, modelo?: string, facturaCompra?: string, fechaCompra?: string, valor?: number, precioRenta?: number, 
+                                  idMarca?: number, idProveedor?: number, idPrestador?: number, idTipo?: number, idEstado?: number, idGrupo?: number) {
+  return await runQueryAsync(
+    `UPDATE dbo.activos SET 
+      numero_serie = COALESCE(${numeroSerie ? `${numeroSerie}` : null}, numero_serie), 
+      modelo = COALESCE(${modelo ? `'${modelo}'` : null}, modelo),
+      factura_compra = COALESCE(${facturaCompra ? `'${facturaCompra}'` : null}, factura_compra),
+      valor = COALESCE(${valor ? `${valor}` : null}, valor),
+      precio_renta = COALESCE(${precioRenta ? `${precioRenta}` : null}, precio_renta),
+      id_marca = COALESCE(${idMarca ? `${idMarca}` : null}, id_marca), 
+      id_proveedor = COALESCE(${idProveedor ? `${idProveedor}` : null}, id_proveedor), 
+      id_prestador = COALESCE(${idPrestador ? `${idPrestador}` : null}, id_prestador), 
+      id_tipo = COALESCE(${idTipo ? `${idTipo}` : null}, id_tipo), 
+      id_estado = COALESCE(${idEstado ? `${idEstado}` : null}, id_estado), 
+      id_grupo = COALESCE(${idGrupo ? `${idGrupo}` : null}, id_grupo) 
+    WHERE id_activo = ${idActivo};`
+    );
+}
+
 export async function newActivo(numeroSerie: string, modelo: string, facturaCompra: string, fechaCompra: string, valor: number, precioRenta: number, 
                                 idMarca: number, idProveedor: number, idPrestador: number, idTipo: number, idEstado: number, idGrupo?: number) {
   return await runQueryAsync(
